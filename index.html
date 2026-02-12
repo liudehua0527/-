@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>截图分拣台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar card">
+        <div>
+          <h1>截图分拣台</h1>
+          <p>丝滑键盘流：1/2/3/4 分类，←/→ 切图，Z 撤回，A 应用待执行</p>
+        </div>
+        <div class="status-pill" id="statusPill">未开始</div>
+      </header>
+
+      <main class="layout">
+        <section class="viewer card">
+          <div class="viewer-meta">
+            <div>
+              <h2 id="fileName">请先选择源文件夹</h2>
+              <p id="fileMeta">文件名解析信息会显示在这里</p>
+            </div>
+            <div class="counter" id="counter">0 / 0</div>
+          </div>
+          <div class="image-wrap">
+            <img id="preview" alt="预览图" />
+            <div class="empty" id="emptyHint">点击右侧按钮选择“源图片文件夹”</div>
+          </div>
+          <div class="queue-list" id="queueList"></div>
+        </section>
+
+        <aside class="panel card">
+          <h3>工作流设置</h3>
+          <div class="block">
+            <button id="pickSource">1. 选择源图片文件夹</button>
+            <button id="pickTarget">2. 选择项目输出文件夹</button>
+          </div>
+
+          <div class="block">
+            <label>执行策略</label>
+            <div class="segmented">
+              <button class="active" data-mode="immediate">即时执行（可撤回）</button>
+              <button data-mode="defer">先打标签，最后批量执行</button>
+            </div>
+          </div>
+
+          <div class="block">
+            <label>文件处理方式</label>
+            <div class="segmented" id="opModeSwitch">
+              <button class="active" data-op="copy">复制（安全）</button>
+              <button data-op="move">剪切（原图移走）</button>
+            </div>
+          </div>
+
+          <div class="block">
+            <label>快捷键映射（可改）</label>
+            <div id="hotkeyMap" class="hotkey-grid"></div>
+          </div>
+
+          <div class="block">
+            <label>自动重命名</label>
+            <div class="rename-row">
+              <input type="checkbox" id="renameToggle" />
+              <span>启用：分类时重命名为 `前缀_时间_来源_G组_序号`</span>
+            </div>
+            <div class="rename-row">
+              <input id="prefix" value="shot" />
+              <input id="startIndex" type="number" min="1" value="1" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="applyQueue">应用待执行 (A)</button>
+            <button id="undo">撤回上一步 (Z)</button>
+            <button id="nextGroup">新建分段组 (G)</button>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="bottom card">
+        <button class="k1">1 推特</button>
+        <button class="k2">2 知乎</button>
+        <button class="k3">3 其他入库</button>
+        <button class="k4">4 其他不入库</button>
+      </footer>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
